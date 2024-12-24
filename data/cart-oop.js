@@ -24,7 +24,7 @@ function Cart(localStorageKey) {
         },
 
         saveToStorage() {
-            localStorage.setItem(localStorageKey, JSON.stringify(this.cartItem));
+            localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
         },
 
         // Check id to increce quantity or add new item to the cart
