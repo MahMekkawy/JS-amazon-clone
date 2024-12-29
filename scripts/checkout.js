@@ -8,21 +8,27 @@ import { loadCart } from "../data/cart.js";
 
 // Using Async Await
 async function loadPage() {
-    await loadProductsFetch();
+    try {
 
-    /*
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve();
-        });
+        // throw 'error3';
+
+        await loadProductsFetch();
+
+        await new Promise((resolve, reject) => {
+            loadCart(() => {
+                // reject();
+                resolve();
+            });
+        }
+        )
+
+        // loadCart();
+
+        renderOrderSummary();
+        renderPaymentSummary();
+    } catch (error) {
+        console.log('Unexpected error. Please try again later.');
     }
-    )
-    */
-
-    loadCart();
-
-    renderOrderSummary();
-    renderPaymentSummary();
 }
 loadPage();
 
