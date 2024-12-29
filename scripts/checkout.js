@@ -5,6 +5,29 @@ import { loadCart } from "../data/cart.js";
 // import '../data/car.js';
 // import '../data/backend-practice.js';
 
+
+// Using Async Await
+async function loadPage() {
+    await loadProductsFetch();
+
+    /*
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    }
+    )
+    */
+
+    loadCart();
+
+    renderOrderSummary();
+    renderPaymentSummary();
+}
+loadPage();
+
+/*
+// Using Promise all to make many prmises work together 
 Promise.all([
     loadProductsFetch(),
 
@@ -19,6 +42,7 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();
 });
+*/
 
 /*
 new Promise((resolve) => {
@@ -42,6 +66,8 @@ new Promise((resolve) => {
 */
 
 /*
+
+// Using Callback function
 loadProducts(() => {
     loadCart(() => {
         console.log('cart loaded successfully');
