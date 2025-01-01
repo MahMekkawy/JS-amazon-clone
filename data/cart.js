@@ -26,7 +26,7 @@ function saveToStorage() {
 }
 
 // Check id to increce quantity or add new item to the cart
-export function addToCart(productId) {
+export function addToCart(productId, quantity) {
     let matchingItem;
 
     cart.forEach((cartItem) => {
@@ -36,7 +36,7 @@ export function addToCart(productId) {
     });
 
     if (matchingItem) {
-        matchingItem.quantity += 1;
+        matchingItem.quantity += quantity;
     } else {
         cart.push({
             productId: productId,
@@ -88,3 +88,23 @@ export function loadCart(fun) {
     xhr.open('GET', 'https://supersimplebackend.dev/cart');
     xhr.send();
 }
+
+export async function loadCartFetch(fun) {
+    const myCart = await fetch('https://supersimplebackend.dev/cart');
+
+    const response = await myCart.text();
+
+    console.log(response);
+
+    fun();
+}
+
+// Calculate Cart Quantity
+export function updateCartQuantity() {
+    let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    return cartQuantity;
+} 

@@ -1,4 +1,4 @@
-import { cart, addToCart } from "../data/cart.js";
+import { cart, addToCart, updateCartQuantity } from "../data/cart.js";
 import { products, loadProducts } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -34,7 +34,7 @@ function renderProductsGrid() {
         </div>
 
         <div class="product-quantity-container">
-          <select>
+          <select class="js-quantity-selector-${product.id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -52,7 +52,7 @@ function renderProductsGrid() {
 
         <div class="product-spacer"></div>
 
-        <div class="added-to-cart">
+        <div class="added-to-cart added-${product.id}">
           <img src="images/icons/checkmark.png">
           Added
         </div>
@@ -66,26 +66,24 @@ function renderProductsGrid() {
 
   document.querySelector('.products-grid').innerHTML = productHTML;
 
-  // Make cart quantity interactive
-  function updateCartQuantity() {
-    let cartQuantity = 0;
-
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
-  }
 
   // Make Add to cart button interactive 
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
+      const quantitySelector = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
-      addToCart(productId);
-      updateCartQuantity();
+      document.querySelector(`.added-${productId}`).classList.add("added-to-cart-visible");
+      setTimeout(() => {
+        document.querySelector(`.added-${productId}`).classList.remove("added-to-cart-visible");
+      }, 2000)
+
+      addToCart(productId, quantitySelector);
+      document.querySelector('.js-cart-quantity').innerHTML = updateCartQuantity();
 
     });
   })
+
+  document.querySelector('.js-cart-quantity').innerHTML = updateCartQuantity();
+
 }

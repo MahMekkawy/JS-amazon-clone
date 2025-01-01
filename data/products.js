@@ -1,6 +1,11 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
 export function getProduct(productId) {
+  // const matchingProduct = products.find((product) => {
+  //   product.id === '5b6fc6f-327a-4ec4-896f-486349e85a3d';
+  // });
+
+
   let matchingProduct;
 
   products.forEach((product) => {
@@ -10,6 +15,8 @@ export function getProduct(productId) {
   })
 
   return matchingProduct;
+  // });
+
 }
 
 export class Product {
