@@ -115,6 +115,7 @@ export function renderOrderSummary() {
 
                 const container = document.querySelector(`.js-cart-item-container-${productId}`)
                 container.remove();
+                renderCheckoutHeader(updateCartQuantity());
                 updateCartQuantity();
                 renderPaymentSummary();
             })
