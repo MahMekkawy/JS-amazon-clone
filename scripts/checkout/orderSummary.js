@@ -2,7 +2,7 @@ import { cart, removeFromCart, updateDeliveryOption, updateCartQuantity, updateC
 import { products, getProduct } from '../../data/products.js'
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
+import { deliveryOptions, deliveryDay } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 import { renderCheckoutHeader } from './checkoutHeader.js';
 
@@ -68,9 +68,7 @@ export function renderOrderSummary() {
 
         deliveryOptions.forEach((deliveryOption) => {
 
-            const today = dayjs();
-            const deliveryDays = today.add(deliveryOption.deliveryDays, 'days');
-            const dateString = deliveryDays.format('dddd, MMMM D');
+            const dateString = deliveryDay(deliveryOption);
 
             const priceString = deliveryOption.priceCent
                 === 0
