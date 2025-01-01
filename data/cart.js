@@ -107,4 +107,20 @@ export function updateCartQuantity() {
         cartQuantity += cartItem.quantity;
     });
     return cartQuantity;
-} 
+}
+
+export function updateCartItemQuantity(productId, newQuantity) {
+    let matchingItem;
+
+    cart.forEach((cartItem) => {
+        if (productId === cartItem.productId) {
+            matchingItem = cartItem;
+        }
+    });
+
+    if (matchingItem) {
+        matchingItem.quantity = newQuantity;
+    }
+
+    saveToStorage();
+}

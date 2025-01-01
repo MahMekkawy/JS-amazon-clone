@@ -53,6 +53,10 @@
   margin-bottom: 12px;
 }
 
+.cart-item-container .quantity-input {
+  width: 30px;
+}
+
 .payment-summary {
   padding-bottom: 5px;
 }
@@ -117,6 +121,22 @@
 
 .product-quantity .link-primary {
   margin-left: 3px;
+}
+
+/* Style quantity and update link */
+.is-editing-quantity .update-quantity-link,
+.is-editing-quantity .quantity-label {
+  display: none;
+}
+
+.is-editing-quantity .save-quantity-link,
+.is-editing-quantity .quantity-input {
+  display: initial;
+}
+
+.save-quantity-link,
+.quantity-input {
+  display: none;
 }
 
 @media (max-width: 1000px) {
