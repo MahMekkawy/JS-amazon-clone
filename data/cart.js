@@ -40,7 +40,7 @@ export function addToCart(productId, quantity) {
     } else {
         cart.push({
             productId: productId,
-            quantity: 1,
+            quantity: quantity,
             deliveryOptionId: '1'
         }
         )
@@ -123,4 +123,12 @@ export function updateCartItemQuantity(productId, newQuantity) {
     }
 
     saveToStorage();
+}
+
+export function clearCart() {
+
+    cart = [];
+
+    saveToStorage();
+
 }

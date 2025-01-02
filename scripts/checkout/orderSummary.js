@@ -116,6 +116,7 @@ export function renderOrderSummary() {
                 renderCheckoutHeader(updateCartQuantity());
                 updateCartQuantity();
                 renderPaymentSummary();
+                renderOrderSummary();
             })
         })
 
@@ -165,5 +166,20 @@ export function renderOrderSummary() {
         })
 
     renderCheckoutHeader(updateCartQuantity());
+
+
+    if (updateCartQuantity() === 0) {
+        document.querySelector('.js-order-summary').innerHTML = `
+            <div class="js-continue-shopping">
+                <p>No Orders Yet</p>
+
+                <a href="../../amazon.html" class="">
+                    <button class="js-continue-shopping-button button-primary">
+                        Continue Shopping
+                    </button>
+                </a>
+            </div>
+        `;
+    }
 
 }

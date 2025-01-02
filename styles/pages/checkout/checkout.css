@@ -229,3 +229,25 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+.js-continue-shopping {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.js-continue-shopping a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.js-continue-shopping-button {
+  width: 75%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  margin-top: 11px;
+  margin-bottom: 15px;
+}

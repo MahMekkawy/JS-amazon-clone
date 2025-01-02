@@ -3,12 +3,13 @@ import { getProduct } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { loadProductsFetch } from "../data/products.js";
+import { addToCart } from "../data/cart.js";
 
 async function loadPage() {
     try {
         await loadProductsFetch();
 
-        function renderOrderProducts(products) {
+        function renderOrderProducts(products, orderId) {
             let html = '';
 
             products.forEach((product) => {
@@ -31,14 +32,14 @@ async function loadPage() {
                         <div class="product-quantity">
                         Quantity: ${product.quantity}
                         </div>
-                        <button class="buy-again-button button-primary js-buy-again" data-product-id="${product.productId}">
+                        <button class="buy-again-button button-primary js-buy-again" data-product-id="${product.productId}" data-quantity="${product.quantity}">
                         <img class="buy-again-icon" src="images/icons/buy-again.png">
                         <span class="buy-again-message">Buy it again</span>
                         </button>
                     </div>
         
                     <div class="product-actions">
-                        <a href="tracking.html?orderId=123&productId=456">
+                        <a href="tracking.html?orderId=${orderId}&productId=${product.productId}">
                         <button class="track-package-button button-secondary js-track-package"  data-product-id="${product.productId}">
                             Track package
                         </button>
@@ -86,7 +87,7 @@ async function loadPage() {
                         </div>
         
                         <div class="order-details-grid">
-                        ${renderOrderProducts(products)}
+                        ${renderOrderProducts(products, order.id)}
                         </div>
                     </div>
                 `
@@ -99,6 +100,18 @@ async function loadPage() {
 
 
         document.querySelector('.js-order-grid').innerHTML = renderOrders();
+
+        document.querySelectorAll('.js-buy-again').forEach((button) => {
+            button.addEventListener('click', () => {
+                const { productId } = button.dataset;
+                const { quantity } = button.dataset;
+
+                addToCart(productId, Number(quantity));
+
+                console.log('Product Added Successfully')
+            });
+        });
+
     } catch (error) {
         console.log('Something went wrong. Please try again later');
     }
