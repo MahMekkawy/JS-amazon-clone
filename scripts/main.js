@@ -1,17 +1,39 @@
 import { cart, addToCart, updateCartQuantity } from "../data/cart.js";
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProducts, setProducts } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
 
 
 loadProducts(renderProductsGrid);
 
+const url = new URL(window.location.href)
+const searchWord = url.searchParams.get('search');
 
 function renderProductsGrid() {
 
   let productHTML = '';
 
+  if (searchWord) {
+
+    const newProducts = products.filter((product) => {
+
+      if (product.name.toLocaleLowerCase().includes(searchWord.toLowerCase())) {
+        return product;
+      } else if (product.keywords.includes(searchWord.toLowerCase())) {
+        return product;
+      }
+
+    });
+
+
+
+    setProducts(newProducts);
+
+  }
+
+
   products.forEach((product) => {
+    console.log(product);
     productHTML += `
         <div class="product-container">
         <div class="product-image-container">
@@ -70,7 +92,6 @@ function renderProductsGrid() {
   // Make Add to cart button interactive 
   let cartQuantity = document.querySelector('.js-cart-quantity');
 
-
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
@@ -88,5 +109,16 @@ function renderProductsGrid() {
   })
 
   updateCartQuantity() > 0 ? cartQuantity.innerHTML = updateCartQuantity() : cartQuantity.innerHTML = '';
+
+  // Make search Bar Interactive
+  document.querySelector('.js-search-button').addEventListener('click', () => {
+    const searchWord = document.querySelector('.js-search-bar').value;
+    if (searchWord === '') {
+      window.location.href = '../amazon.html';
+    } else {
+      window.location.href = `../amazon.html?search=${searchWord}`;
+
+    }
+  })
 
 }
