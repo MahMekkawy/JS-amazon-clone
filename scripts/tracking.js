@@ -1,5 +1,6 @@
 import { orders } from "../data/orders.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
+import { updateCartQuantity } from "../data/cart.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 
@@ -116,6 +117,10 @@ async function loadPage() {
         console.log(error)
         console.log('Something Went Wrong. Please Try Again Later');
     }
+
+    let cartQuantity = document.querySelector('.js-cart-quantity');
+
+    updateCartQuantity() > 0 ? cartQuantity.innerHTML = updateCartQuantity() : cartQuantity.innerHTML = '';
 
 }
 

@@ -33,7 +33,7 @@ function renderProductsGrid() {
 
 
   products.forEach((product) => {
-    console.log(product);
+
     productHTML += `
         <div class="product-container">
         <div class="product-image-container">

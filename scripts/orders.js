@@ -3,7 +3,7 @@ import { getProduct } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { loadProductsFetch } from "../data/products.js";
-import { addToCart } from "../data/cart.js";
+import { addToCart, updateCartQuantity } from "../data/cart.js";
 
 async function loadPage() {
     try {
@@ -101,6 +101,8 @@ async function loadPage() {
 
         document.querySelector('.js-order-grid').innerHTML = renderOrders();
 
+        // Make Buy it again interactive
+
         document.querySelectorAll('.js-buy-again').forEach((button) => {
             button.addEventListener('click', () => {
                 const { productId } = button.dataset;
@@ -109,12 +111,18 @@ async function loadPage() {
                 addToCart(productId, Number(quantity));
 
                 console.log('Product Added Successfully')
+
+                document.querySelector('.js-cart-quantity').innerHTML = updateCartQuantity();
             });
         });
 
     } catch (error) {
         console.log('Something went wrong. Please try again later');
     }
+
+    let cartQuantity = document.querySelector('.js-cart-quantity');
+    updateCartQuantity() > 0 ? cartQuantity.innerHTML = updateCartQuantity() : cartQuantity.innerHTML = '';
+
 }
 
 loadPage();
