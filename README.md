@@ -118,6 +118,6 @@ Mahmoud Mekkawy
 
 Frontend Developer
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/MahMekkawy
 
-LinkedIn: https://linkedin.com/in/your-linkedin
+LinkedIn: https://www.linkedin.com/in/mahmoud-mekkawy/
