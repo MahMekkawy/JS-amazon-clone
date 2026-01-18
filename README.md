@@ -6,8 +6,7 @@ This project demonstrates DOM manipulation, event handling, localStorage, and dy
 ---
 
 ## 🚀 Live Demo
-*(Optional: add your GitHub Pages link here if available)*  
-Example: https://your-username.github.io/amazon-clone/
+https://amazon-clone96.netlify.app/
 
 ---
 
